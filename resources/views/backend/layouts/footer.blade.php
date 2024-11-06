@@ -16,7 +16,7 @@
                 alt=""
               />
               <div>
-                <p class="m-0">&copy; {{date('Y')}} LVN School</p>
+                <p class="m-0">&copy; {{date('Y')}} RNG DEV HR</p>
                 <p class="m-0">All rights reserved</p>
               </div>
             </div>

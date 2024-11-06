@@ -60,7 +60,7 @@
             @include('backend.layouts.footer')
          </div>
       </div>
-      @include('backend.layouts.headerSearchBar')
+      <!-- @include('backend.layouts.headerSearchBar') -->
       <!-- script js -->
       <script src="{{url('assets/backend')}}/js/plugins/jquery-3.3.1.min.js"></script>
       <script src="{{url('assets/backend')}}/js/plugins/bootstrap.bundle.min.js"></script>

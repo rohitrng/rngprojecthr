@@ -4,7 +4,7 @@
        <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>LVN-School</title>
+    <title>RNG DEV-HR</title>
     @if(Request::segment(1)=='add-student-registrations' )
     @endif
     @if(Request::segment(1)=='inquiry-data-show' || Request::segment(1)=='users')
