@@ -32,6 +32,7 @@ use App\Http\Controllers\Refundvoucher;
 use App\Http\Controllers\FeestypemasterController;
 use App\Http\Controllers\BusfeesmasterController;
 use App\Http\Controllers\backend\InquiryEntryController;
+use App\Http\Controllers\backend\ResumeController;
 use App\Http\Controllers\backend\BusstopController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\backend\MasterRegistrationController;
@@ -755,7 +756,8 @@ Route::post('change_password', [Changepassword::class, 'create']);
     Route::get('enquiry-data', [EnquiryListdataController::class,'index'])->name('enquiry-data');
     Route::post('filter-enquiry-list',[EnquiryListdataController::class, 'filter_enquiryList']);
 
-
+    Route::post('save_resume_inq', [ResumeController::class, 'save_resume_inq']);
+    
     Route::post('save_student_inquiryentry', [InquiryEntryController::class, 'save_student_inquiryentry']);
     Route::get('adminenquirylist', [InquiryEntryController::class,'adminenquirylist'])->name('adminenquirylist');
     Route::get('followupdate', [InquiryEntryController::class,'followupdate'])->name('followupdate');

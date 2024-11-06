@@ -1,62 +1,75 @@
 @extends('backend.layouts.main')
 @section('main-container')
-  <script type="text/javascript">jQuery.noConflict();</script> 
-
-         <div class="main-content">
-          <div class="breadcrumb">
-              @role('Student')
-            <h1 class="me-2">Student Panel</h1>
-            @endrole
-            <h1 class="me-2">Admin Panel</h1>
-            <ul>
-              <li><a href="">Dashboard</a></li>
-            </ul>
-          </div>
-          <div class="separator-breadcrumb border-top"></div>
-                
-          <div class="flex-grow-1"></div>
-          <!-- fotter end -->
-        </div>
-        <script>
-          "use strict";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-  var echartElem1 = document.getElementById('echart1');
-
-  if (echartElem1) {
-    var echart1 = echarts.init(echartElem1);
-    echart1.setOption(_objectSpread({}, echartOptions.defaultOptions, {}, {
-      grid: echartOptions.gridAlignLeft,
-      series: [_objectSpread({
-        data: [30, 40, 20, 50, 40, 80, 90, 40]
-      }, echartOptions.smoothLine, {
-        lineStyle: _objectSpread({
-          color: '#4CAF50'
-        }, echartOptions.lineShadow),
-        itemStyle: {
-          color: '#4CAF50'
-        }
-      })]
-    }));
-    
-  }
-
   
-}, false);
-        </script>
+<div class="page-content-wrapper ">
 
-<script>
-  function redirectToEnquiryData() {
-      window.location.href = "{{ route('enquiry-data') }}"; // Replace 'enquiry-data' with your actual route name
-  }
-</script>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="btn-group float-right">
+                    <!-- <ol class="breadcrumb hide-phone p-0 m-0">
+                        <li class="breadcrumb-item"><a href="#">Zoogler</a></li>
+                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                        <li class="breadcrumb-item active">Form Advanced</li>
+                    </ol> -->
+                </div>
+                <h4 class="page-title">Add Candidate</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body bootstrap-select-1">
+                    <h4 class="mt-0 header-title">Add Selected Resume</h4>
+                    <!-- <p class="text-muted mb-4 font-13">Simple jQuery Based Color and Gradient Picker - asColorPicker. </p> -->
+                    <form method="post" action="{{url('save_resume_inq')}}" enctype="multipart/form-data">
+                    <div class="row">
+                      @csrf
+                        <div class="col-md-6 form-group">
+                            <h6 class=" input-title mb-2 mt-0">Candidate Name</h6>                                            
+                            <input type="text" name="candidate_name" class="form-control" value="" /> 
+                        </div>                                    
+                        <div class="col-md-6 form-group">
+                            <h6 class=" input-title mb-2 mt-2 mt-lg-0">Candidate Mobile</h6>                                            
+                            <input type="text" name="candidate_mobile" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <h6 class=" input-title mb-2 mt-2 mt-lg-0">Candidate Email</h6>                                           
+                            <input type="text" name="candidate_email" class="form-control" value="" /> 
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <h6 class=" input-title mb-2 mt-2 mt-lg-0">Candidate Resume</h6>                                           
+                            <input type="file" name="candidate_resume" class="form-control" value="" /> 
+                        </div>
+
+                        <div class="col-md-4 form-group mb-0">    
+                        <h6 class=" input-title mb-2 mt-2 mt-lg-0"></h6>        
+                          <button type="submit" class="btn btn-primary waves-effect waves-light">
+                            Submit
+                          </button>  
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>                                
+        </div> <!-- end col -->
+    </div> <!-- end row --> 
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            </div>                                        
+        </div> <!-- end col -->
+    </div> <!-- end row --> 
+   
+
+</div><!-- container -->
+
+</div> <!-- Page content Wrapper -->
+
 
 @endsection 
