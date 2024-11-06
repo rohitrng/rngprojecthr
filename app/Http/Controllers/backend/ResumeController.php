@@ -26,7 +26,7 @@ class ResumeController extends Controller
 {
     public function __construct(Request $request)
     {
-        $db_name = "kb";
+        $db_name = "hr_project";
     }
 
     public function save_class_name()

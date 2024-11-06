@@ -14,7 +14,7 @@ class GlobalData extends ServiceProvider
     public function register()
     {
         
-        $db_name = "kb";
+        $db_name = "hr_project";
         $sessionName = Session::getName();
         $dynamicConnectionName = 'dynamic';
         $dynamicConfig = Config::get("database.connections.{$dynamicConnectionName}");

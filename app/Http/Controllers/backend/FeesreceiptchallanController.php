@@ -31,11 +31,11 @@ class FeesreceiptchallanController extends Controller
             if (isset($_COOKIE['selectedYear'])) {
                 $db_name = $_COOKIE['selectedYear'];
             } else {
-                $db_name = "kb";
+                $db_name = "hr_project";
             }
             
         }
-        // $db_name = "kb";
+        // $db_name = "hr_project";
 
         $dynamicConnectionName = 'dynamic';
         $dynamicConfig = Config::get("database.connections.{$dynamicConnectionName}");
@@ -513,7 +513,7 @@ class FeesreceiptchallanController extends Controller
     }
 
     public function save_feesreceipt_challan_public(Request $request){
-        $db_name = "kb";
+        $db_name = "hr_project";
         $dynamicConnectionName = 'dynamic';
         $dynamicConfig = Config::get("database.connections.{$dynamicConnectionName}");
         $dynamicConfig['database'] = $db_name;

@@ -5,7 +5,7 @@ error_reporting(-1);
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "kb";
+$dbname = "hr_project";
 
 $con = mysqli_connect($host, $user, $password, $dbname);
 
@@ -48,7 +48,7 @@ if (isset($_POST['submit']))
             $student_name = $getData[0];
             $form_number = $getData[1];
             
-            $session_name = "kb";
+            $session_name = "hr_project";
             $mobile_number = null;
 
             $scholar_no = $getData[1];
@@ -160,7 +160,7 @@ if (isset($_POST['submit']))
                 "gender"=> $gender,
                 "student_dob"=> $date_of_birth,
                 "nationality"=> "INDIA",
-                "session_name"=> "kb",
+                "session_name"=> "hr_project",
                 "present_address"=> $permanent_address,
                 "permanent_address"=> $permanent_address,
                 "phone_number"=> $permanent_phone,

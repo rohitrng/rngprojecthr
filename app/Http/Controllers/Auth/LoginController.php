@@ -43,7 +43,7 @@ class LoginController extends Controller
         if (!empty($request->year)){
             $this->db_name = $request->year; 
         } else {
-            $this->db_name = "kb";
+            $this->db_name = "hr_project";
         }
         // $dynamicConnectionName = 'dynamic';
         // $dynamicConfig = Config::get("database.connections.{$dynamicConnectionName}");

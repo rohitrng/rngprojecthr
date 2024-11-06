@@ -27,7 +27,7 @@
 
     // Execute the query to create the new database
     if ($conn->query($createDatabaseSQL) === TRUE) {
-        $existingDatabaseName = "kb"; // Replace with the name of your existing database
+        $existingDatabaseName = "hr_project"; // Replace with the name of your existing database
 
         // SQL query to list tables in the existing database
         $listTablesSQL = "SHOW TABLES FROM $existingDatabaseName";

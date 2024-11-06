@@ -30,7 +30,7 @@ class ClassesController extends Controller
             if (isset($_COOKIE['selectedYear'])) {
                 $db_name = $_COOKIE['selectedYear'];
             } else {
-                $db_name = "kb";
+                $db_name = "hr_project";
             }
             
         }
