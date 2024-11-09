@@ -21,12 +21,19 @@ use Illuminate\Support\Facades\Config;
 // use Illuminate\Support\Facades\DB
 //use Request;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
+
 
 class ResumeController extends Controller
 {
-    public function __construct(Request $request)
+    protected $userId;
+
+    public function __construct()
     {
-        $db_name = "hr_project";
+        $this->middleware(function ($request, $next) {
+            $this->userId = Auth::id();
+            return $next($request);
+        });
     }
 
     public function save_class_name()
@@ -36,8 +43,8 @@ class ResumeController extends Controller
         return view('backend.FeesDue-chart.preinquiryregistration.blade', compact('datas'));
     }
 
-
     public function save_resume_inq(Request $request){
+
         $request->validate([
             'candidate_name' => 'required|string|max:255',
             'candidate_mobile' => 'required|string|max:15',
@@ -47,16 +54,18 @@ class ResumeController extends Controller
     
         // Handle the resume upload
         if ($request->hasFile('candidate_resume')) {
-            // Store the file in the 'public/resumes' directory and get the file path
-            $filePath = $request->file('candidate_resume')->store('resumes', 'public');
-        }
+            // Store the file directly in the 'public/resumes' directory
+            $filePath = $request->file('candidate_resume')->move(public_path('resumes'), $request->file('candidate_resume')->getClientOriginalName());
+        }        
     
         // Insert the data into the database
         $insertArr = [
             'candidate_name' => $request->candidate_name,
             'candidate_mobile' => $request->candidate_mobile,
             'candidate_email' => $request->candidate_email,
-            'candidate_resume' => $filePath ?? null,  // Save file path if it exists
+            'candidate_status' => 'p',
+            'user_id' => $this->userId,
+            'candidate_resume' => 'resumes/' . $request->file('candidate_resume')->getClientOriginalName(),  // Save the file path
         ];
 
         DB::connection('dynamic')->table('candidate_resume')->insert($insertArr);
@@ -65,6 +74,48 @@ class ResumeController extends Controller
         return redirect('admin-dashboard')
                         ->with('success', 'Record inserted successfully');
     }
+
+    public function resume_list()
+{
+    // Check if the user has the 'Admin' role
+    $query = DB::connection('dynamic')->table('candidate_resume');
+
+    // If the user is not an Admin, apply the 'where' condition
+    if (!Auth::user()->hasRole('Admin')) {
+        $query->where('user_id', $this->userId);
+    }
+
+    // Get the data
+    $datas = $query->get();
+
+    // Return the view with the data
+    return view('backend.resume_list', compact('datas'));
+}
+
+
+    public function updateCandidateStatus(Request $request){
+    // Validate request data
+    $request->validate([
+        'id' => 'required|integer',
+        'status' => 'required|string|in:p,a',  // 'p' for pending, 'a' for approved
+    ]);
+
+    // Retrieve the candidate record from the database
+    $candidate = DB::connection('dynamic')->table('candidate_resume')->where('id', $request->id)->first();
+
+    if ($candidate) {
+        // Update the candidate status
+        DB::connection('dynamic')->table('candidate_resume')
+            ->where('id', $request->id)
+            ->update(['candidate_status' => $request->status]);
+
+        return response()->json(['success' => true]);
+    }
+
+    // If no candidate was found, return a failure response
+    return response()->json(['success' => false]);
+}
+
 
 
     public function adminenquirylist(Request $request)

@@ -170,8 +170,9 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('products', ProductController::class);
     /*Admin Routes*/
     Route::get('admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('resume-list', [ResumeController::class,'resume_list'])->name('resume-list');
+    Route::post('/update-candidate-status', [ResumeController::class, 'updateCandidateStatus'])->name('update-candidate-status');
 
-    
     Route::get('/Dashboard ',[RegistrationController::class, 'dashboard'])->name('dashboard');
     Route::get('/mcq ',[McqController::class, 'index'])->name('mcq');
     

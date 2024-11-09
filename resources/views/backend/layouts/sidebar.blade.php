@@ -19,7 +19,7 @@
                 </div>
                 <div class="sidebar-user">
                     <!-- <img src="assets/images/users/avatar-6.jpg" alt="user" class="rounded-circle img-thumbnail mb-1"> -->
-                    <h6 class="">Hello </h6> 
+                    <h6 class="">Hello {{Auth::user()->student_name}}</h6> 
                     <p class=" online-icon text-dark"><i class="mdi mdi-record text-success"></i>online</p>                    
                     <ul class="list-unstyled list-inline mb-0 mt-2">
                         <!-- <li class="list-inline-item">
@@ -42,6 +42,9 @@
                                 <a href="javascript:void(0);" class="waves-effect"><!--<i class="dripicons-jewel"></i>--> <span> Candidate data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ 'admin-dashboard' }}">Resume Add</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ 'resume-list' }}">Resume List</a></li>
                                 </ul>
                             </li>
                         </ul>
