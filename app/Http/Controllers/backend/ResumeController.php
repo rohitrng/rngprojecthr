@@ -64,6 +64,7 @@ class ResumeController extends Controller
             'candidate_mobile' => $request->candidate_mobile,
             'candidate_email' => $request->candidate_email,
             'candidate_status' => 'p',
+            'candidate_profile' => $request->c_profile,
             'user_id' => $this->userId,
             'candidate_resume' => 'resumes/' . $request->file('candidate_resume')->getClientOriginalName(),  // Save the file path
         ];
@@ -75,8 +76,7 @@ class ResumeController extends Controller
                         ->with('success', 'Record inserted successfully');
     }
 
-    public function resume_list()
-{
+    public function resume_list(){
     // Check if the user has the 'Admin' role
     $query = DB::connection('dynamic')->table('candidate_resume');
 

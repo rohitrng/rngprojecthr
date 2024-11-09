@@ -28,6 +28,7 @@
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
+                                    <th>Profile</th>
                                     <th>Status</th>
                                     <th>View Resume</th>
                                 </tr>
@@ -38,6 +39,7 @@
                                     <td>{{ $data->candidate_name }}</td>
                                     <td>{{ $data->candidate_mobile }}</td>
                                     <td>{{ $data->candidate_email }}</td>
+                                    <td>{{ $data->candidate_profile }}</td>
                                     @role('Hr')
                                     <td>
                                         @if($data->candidate_status=='p') <span class="badge bg-danger text-white">Pending</span> @else <span class="badge bg-success text-white">Approval</span> @endif

@@ -38,6 +38,15 @@
                             <input type="text" name="candidate_mobile" class="form-control" value="" />
                         </div>
                         <div class="col-md-6 form-group">
+                            <h6 class=" input-title mb-2 mt-2 mt-lg-0">Candidate Profile</h6>                                           
+                            <select name="c_profile" class="form-control">
+                                <option value="">Select Profile</option>
+                                <option value="Android Developer">Android Developer</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
+                                <option value="Sales Marketing">Sales Marketing</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
                             <h6 class=" input-title mb-2 mt-2 mt-lg-0">Candidate Email</h6>                                           
                             <input type="text" name="candidate_email" class="form-control" value="" /> 
                         </div>
