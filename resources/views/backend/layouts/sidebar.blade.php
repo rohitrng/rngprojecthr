@@ -41,17 +41,18 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><!--<i class="dripicons-jewel"></i>--> <span> Candidate data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{ 'admin-dashboard' }}">Resume Add</a></li>
+                                    <li><a href="{{ url('admin-dashboard') }}">Resume Add</a></li>
                                 </ul>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{ 'resume-list' }}">Resume List</a></li>
+                                    <li><a href="{{ url('resume-list') }}">Resume List</a></li>
                                 </ul>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{ 'candidate-onboarding' }}">Candidate Onboarding</a></li>
+                                    <li><a href="{{ url('candidate-onboarding') }}">Candidate Onboarding</a></li>
                                 </ul>
-                                <!-- <ul class="list-unstyled">
-                                    <li><a href="{{ 'candidate-onboarding-list' }}">Candidate Onboarding List</a></li>
-                                </ul> -->
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ url('candidate-onboarding-list') }}">Candidate Onboarding List</a></li>
+                                </ul>
+
                             </li>
                         </ul>
                     </div>

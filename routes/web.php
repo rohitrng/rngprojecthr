@@ -176,6 +176,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/update-candidate-status', [ResumeController::class, 'updateCandidateStatus'])->name('update-candidate-status');
     Route::get('candidate-onboarding', [ResumeController::class, 'candidate_onboarding'])->name('candidate-onboarding');
     Route::post('save_candidate_details', [ResumeController::class, 'save_candidate_details'])->name('save_candidate_details');
+    Route::get('candidate-onboarding-list', [ResumeController::class, 'candidate_onboarding_list'])->name('candidate-onboarding-list');
+    Route::get('onboarding-single-page/{id}', [ResumeController::class, 'onboarding_single_page'])->name('onboarding-single-page');
 
     Route::get('/Dashboard ',[RegistrationController::class, 'dashboard'])->name('dashboard');
     Route::get('/mcq ',[McqController::class, 'index'])->name('mcq');

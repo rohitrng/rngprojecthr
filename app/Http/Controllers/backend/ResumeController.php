@@ -191,6 +191,39 @@ class ResumeController extends Controller
                         ->with('success', 'Record inserted successfully');
     }
 
+    public function candidate_onboarding_list(){
+        // Check if the user has the 'Admin' role
+        $query = DB::connection('dynamic')->table('candidate_onboarding')->select('id','employee_id', 'full_name', 'email_address', 'contact_number', 'managers_name', 'date_of_joining');
+
+        // If the user is not an Admin, apply the 'where' condition
+        if (!Auth::user()->hasRole('Admin')) {
+            $query->where('user_id', $this->userId);
+        }
+
+        // Get the data
+        $datas = $query->get();
+
+        // Return the view with the data
+        return view('backend.candidate_onboarding_list', compact('datas'));
+    }
+
+    public function onboarding_single_page($id){
+        // Check if the user has the 'Admin' role
+        $query = DB::connection('dynamic')->table('candidate_onboarding');
+
+        // If the user is not an Admin, apply the 'where' condition
+        if (!Auth::user()->hasRole('Admin')) {
+            $query->where('user_id', $this->userId);
+        }
+        $query->where('id', $id);
+
+        // Get the data
+        $datas = $query->first();
+
+        // Return the view with the data
+        return view('backend.candidate_onboarding_single_page', compact('datas'));
+    }
+
     public function updateCandidateStatus(Request $request){
     // Validate request data
     $request->validate([
