@@ -46,6 +46,12 @@
                                 <ul class="list-unstyled">
                                     <li><a href="{{ 'resume-list' }}">Resume List</a></li>
                                 </ul>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ 'candidate-onboarding' }}">Candidate Onboarding</a></li>
+                                </ul>
+                                <!-- <ul class="list-unstyled">
+                                    <li><a href="{{ 'candidate-onboarding-list' }}">Candidate Onboarding List</a></li>
+                                </ul> -->
                             </li>
                         </ul>
                     </div>

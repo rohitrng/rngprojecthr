@@ -56,7 +56,7 @@ class ResumeController extends Controller
         if ($request->hasFile('candidate_resume')) {
             // Store the file directly in the 'public/resumes' directory
             $filePath = $request->file('candidate_resume')->move(public_path('resumes'), $request->file('candidate_resume')->getClientOriginalName());
-        }        
+        }
     
         // Insert the data into the database
         $insertArr = [
@@ -77,21 +77,119 @@ class ResumeController extends Controller
     }
 
     public function resume_list(){
-    // Check if the user has the 'Admin' role
-    $query = DB::connection('dynamic')->table('candidate_resume');
+        // Check if the user has the 'Admin' role
+        $query = DB::connection('dynamic')->table('candidate_resume');
 
-    // If the user is not an Admin, apply the 'where' condition
-    if (!Auth::user()->hasRole('Admin')) {
-        $query->where('user_id', $this->userId);
+        // If the user is not an Admin, apply the 'where' condition
+        if (!Auth::user()->hasRole('Admin')) {
+            $query->where('user_id', $this->userId);
+        }
+
+        // Get the data
+        $datas = $query->get();
+
+        // Return the view with the data
+        return view('backend.resume_list', compact('datas'));
+    }
+    public function candidate_onboarding(){
+        $lastId = DB::connection('dynamic')->table('candidate_onboarding')->max('id');
+        $newId = $lastId ? $lastId + 1 : 1;
+        return view('backend.candidate_onboarding',['newId' => $newId]);        
     }
 
-    // Get the data
-    $datas = $query->get();
+    public function save_candidate_details(Request $request){
+        // Handle the resume upload
+        if ($request->hasFile('candidate_resume')) {
+            $filePath = $request->file('candidate_resume')->move(public_path('resumes'), $request->file('candidate_resume')->getClientOriginalName());
+            $data['candidate_resume'] = 'resumes/' . $request->file('candidate_resume')->getClientOriginalName();
+        } else {
+            $data['candidate_resume'] = null; // or you can use a default string like 'No file uploaded'
+        }        
+        if ($request->hasFile('experience_letter')) {
+            $filePath = $request->file('experience_letter')->move(public_path('experience_letter'), $request->file('experience_letter')->getClientOriginalName());
+            $data['experience_letter'] = 'experience_letter/' . $request->file('experience_letter')->getClientOriginalName();
+        } else {
+            $data['experience_letter'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('relieving_letter')) {
+            $filePath = $request->file('relieving_letter')->move(public_path('relieving_letter'), $request->file('relieving_letter')->getClientOriginalName());
+            $data['relieving_letter'] = 'relieving_letter/' . $request->file('relieving_letter')->getClientOriginalName();
+        } else {
+            $data['relieving_letter'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('pay_slips')) {
+            $filePath = $request->file('pay_slips')->move(public_path('pay_slips'), $request->file('pay_slips')->getClientOriginalName());
+            $data['pay_slips'] = 'pay_slips/' . $request->file('pay_slips')->getClientOriginalName();
+        } else {
+            $data['pay_slips'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('offer_letter')) {
+            $filePath = $request->file('offer_letter')->move(public_path('offer_letter'), $request->file('offer_letter')->getClientOriginalName());
+            $data['offer_letter'] = 'offer_letter/' . $request->file('offer_letter')->getClientOriginalName();
+        } else {
+            $data['offer_letter'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('aadhar_card')) {
+            $filePath = $request->file('aadhar_card')->move(public_path('aadhar_card'), $request->file('aadhar_card')->getClientOriginalName());
+            $data['aadhar_card'] = 'aadhar_card/' . $request->file('aadhar_card')->getClientOriginalName();
+        } else {
+            $data['aadhar_card'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('pan_card')) {
+            $filePath = $request->file('pan_card')->move(public_path('pan_card'), $request->file('pan_card')->getClientOriginalName());
+            $data['pan_card'] = 'pan_card/' . $request->file('pan_card')->getClientOriginalName();
+        } else {
+            $data['pan_card'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('degree_certificates')) {
+            $filePath = $request->file('degree_certificates')->move(public_path('degree_certificates'), $request->file('degree_certificates')->getClientOriginalName());
+            $data['degree_certificates'] = 'degree_certificates/' . $request->file('degree_certificates')->getClientOriginalName();
+        } else {
+            $data['degree_certificates'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        if ($request->hasFile('passport_sized_photographs')) {
+            $filePath = $request->file('passport_sized_photographs')->move(public_path('passport_sized_photographs'), $request->file('passport_sized_photographs')->getClientOriginalName());
+            $data['passport_sized_photographs'] = 'passport_sized_photographs/' . $request->file('passport_sized_photographs')->getClientOriginalName();
+        } else {
+            $data['passport_sized_photographs'] = null; // or you can use a default string like 'No file uploaded'
+        }
+        $datas = [
+            'job_title_position' => $request->job_title_position,
+            'date_of_joining' => $request->date_of_joining,
+            'department_team' => $request->department_team,
+            'employee_id' => $request->employee_id,
+            'managers_name' => $request->managers_name,
+            'office_location' => $request->office_location,
+            'employee_type' => $request->employee_type,
+            'candidate_resume' => $data['candidate_resume'],  // Save the file path $request->candidate_resume, // file
+            'last_employer_name' => $request->last_employer_name,
+            'last_job_title' => $request->last_job_title,
+            'total_experience' => $request->total_experience,
+            'last_ctc' => $request->last_ctc,
+            'experience_letter' => $data['experience_letter'], //$request->experience_letter, //file
+            'relieving_letter' => $data['relieving_letter'], //$request->relieving_letter, //file
+            'pay_slips' => $data['pay_slips'], //$request->pay_slips, //file
+            'offer_letter' => $data['offer_letter'], //$request->offer_letter, //file
+            'full_name' => $request->full_name,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'contact_number' => $request->contact_number,
+            'email_address' => $request->email_address,
+            'permanent_address' => $request->permanent_address,
+            'current_address' => $request->current_address,
+            'aadhar_card' => $data['aadhar_card'], //$request->aadhar_card, //file
+            'pan_card' => $data['pan_card'], //$request->pan_card, //file
+            'degree_certificates' => $data['degree_certificates'], //$request->degree_certificates, //file
+            'passport_sized_photographs' => $data['passport_sized_photographs'], //$request->passport_sized_photographs, //file
+            'user_id' => $this->userId,
+        ];
 
-    // Return the view with the data
-    return view('backend.resume_list', compact('datas'));
-}
-
+        DB::connection('dynamic')->table('candidate_onboarding')->insert($datas);
+    
+        // Redirect back with success message
+        return redirect('candidate-onboarding')
+                        ->with('success', 'Record inserted successfully');
+    }
 
     public function updateCandidateStatus(Request $request){
     // Validate request data

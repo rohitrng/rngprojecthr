@@ -170,8 +170,12 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('products', ProductController::class);
     /*Admin Routes*/
     Route::get('admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // resumeController
     Route::get('resume-list', [ResumeController::class,'resume_list'])->name('resume-list');
     Route::post('/update-candidate-status', [ResumeController::class, 'updateCandidateStatus'])->name('update-candidate-status');
+    Route::get('candidate-onboarding', [ResumeController::class, 'candidate_onboarding'])->name('candidate-onboarding');
+    Route::post('save_candidate_details', [ResumeController::class, 'save_candidate_details'])->name('save_candidate_details');
 
     Route::get('/Dashboard ',[RegistrationController::class, 'dashboard'])->name('dashboard');
     Route::get('/mcq ',[McqController::class, 'index'])->name('mcq');
