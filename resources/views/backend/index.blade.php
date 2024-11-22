@@ -44,6 +44,7 @@
                                 <option value="Android Developer">Android Developer</option>
                                 <option value="Digital Marketing">Digital Marketing</option>
                                 <option value="Sales Marketing">Sales Marketing</option>
+                                <option value="Ai Developer">Ai Developer</option>
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
